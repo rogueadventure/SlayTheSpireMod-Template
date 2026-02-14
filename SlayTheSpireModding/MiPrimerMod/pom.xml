@@ -1,0 +1,105 @@
+<!--
+Este archivo NO es obligatorio.
+Se deja solo como referencia por si alguien quiere
+usar Maven en vez del build.bat.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Cambiar si creas tu propio mod -->
+    <groupId>miprimermod</groupId>
+    <artifactId>MiPrimerMod</artifactId>
+    <version>1.0</version>
+
+    <name>MiPrimerMod</name>
+
+    <!-- =====================================================
+         DEPENDENCIAS LOCALES DEL JUEGO
+         Deben existir en la carpeta padre del proyecto:
+         ../desktop-1.0.jar
+         ../BaseMod.jar
+         ../StSLib.jar
+         ../ModTheSpire.jar
+         ===================================================== -->
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.megacrit.cardcrawl</groupId>
+            <artifactId>slaythespire</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../desktop-1.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>basemod</groupId>
+            <artifactId>basemod</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../BaseMod.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>stslib</groupId>
+            <artifactId>stslib</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../StSLib.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>mts</groupId>
+            <artifactId>modthespire</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../ModTheSpire.jar</systemPath>
+        </dependency>
+
+    </dependencies>
+
+    <!-- =====================================================
+         COMPILAR EN JAVA 8 (OBLIGATORIO PARA STS)
+         ===================================================== -->
+    <build>
+        <finalName>MiPrimerMod</finalName>
+
+        <plugins>
+
+            <!-- Compilar en Java 8 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <!-- Empaquetar el jar incluyendo ModTheSpire.json -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Main-Class>miprimermod.MiPrimerMod</Main-Class>
+                        </manifestEntries>
+                    </archive>
+                    <includes>
+                        <include>**/*.class</include>
+                        <include>ModTheSpire.json</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
